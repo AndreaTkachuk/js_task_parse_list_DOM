@@ -3,12 +3,15 @@
 const list = document.querySelector('ul');
 
 function strNum(str) {
-  const result = str
-    .slice(1)
-    .split(',')
-    .reduce((a, b) => a + b);
+  const result = [];
 
-  return +result;
+  for (let i = 1; i < str.length; i++) {
+    if (Number(str[i]) || str[i] === '0') {
+      result.push(str[i]);
+    }
+  }
+
+  return Number(result.join(''));
 }
 
 function sortList(someList) {
@@ -27,7 +30,7 @@ function getEmployees(someList) {
   const items = Array.from(someList.getElementsByTagName('li'));
 
   return items.map((el) => ({
-    ...someList,
+    ...el,
     'data-salary': strNum(el.getAttribute('data-salary')),
   }));
 }
